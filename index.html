@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <button id="openaiKeyStatus" class="openai-key-status hidden" type="button">✅ openai key已儲存（按此刪除）</button>
     <div class="bg-shape"></div>
     <main class="container">
       <header class="topbar">
@@ -23,7 +24,8 @@
         <form id="eventForm">
           <label>
             事件名稱
-            <input id="eventName" name="eventName" type="text" maxlength="60" placeholder="例如：換床單" required />
+            <input id="eventName" name="eventName" type="text" maxlength="60" placeholder="例如：換床單" list="eventNameSuggestions" required />
+            <datalist id="eventNameSuggestions"></datalist>
           </label>
 
           <label>
@@ -49,6 +51,25 @@
         <div id="timelines" class="timelines"></div>
       </section>
     </main>
+
+    <dialog id="apiKeyDialog" class="api-key-dialog">
+      <form id="apiKeyForm" class="api-key-form" method="dialog">
+        <h3>需要 OpenAI API Key</h3>
+        <p>用來為事件類別產生插畫背景圖。</p>
+        <label>
+          OpenAI API Key
+          <input id="apiKeyInput" type="password" placeholder="sk-..." autocomplete="off" required />
+        </label>
+        <label class="checkbox-row">
+          <input id="saveApiKeyCheckbox" type="checkbox" />
+          儲存到此瀏覽器（localStorage）
+        </label>
+        <div class="dialog-actions">
+          <button id="cancelApiKeyBtn" type="button" class="btn btn-secondary">取消</button>
+          <button type="submit" class="btn btn-primary">確認</button>
+        </div>
+      </form>
+    </dialog>
 
     <script type="module" src="./app.js"></script>
   </body>
